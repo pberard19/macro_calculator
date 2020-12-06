@@ -6,10 +6,20 @@
   max-width: 900px;
   margin-top: 3rem;
 }
+.selectorContainer {
+  display:flex;
+  flex-direction: row;
+  margin-top: 3rem;
+  max-width: 1200px;
 
+  align-items: center;
+  justify-content: center;
+  // flex-wrap: wrap;
+}
 .card {
   margin: 1rem;
-  flex-basis: 45%;
+  // flex-basis: 45%;
+  width: 250px;
   padding: 1.5rem;
   text-align: left;
   color: inherit;
@@ -53,5 +63,16 @@
 }
 
 .numberInput {
+  border: 1px solid #eaeaea;
+  border-radius: 5px;
+}
 
+.numberInput:hover,
+.numberInput:focus,
+.numberInput:active {
+  border-color: #0070f3;
+}
+
+.selectorLabel {
+  width: 120px;
 }

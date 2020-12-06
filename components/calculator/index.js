@@ -1,11 +1,25 @@
 import React, { useState } from 'react';
 import styles from './index.module.scss'
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+const {food} = require('./food')
 
 export const Calculator = () => {
-  // Declare a new state variable, which we'll call "count"
+  const proteins = food['proteins']
+  const carbs = food['carbohydrates']
+  const fats = food['fats']
+
+  const proteinOptions = Object.keys(proteins);
+  const carbOptions = Object.keys(carbs);
+  const fatOptions = Object.keys(fats);
+
   const [proteinGoal, setProteinGoal] = useState(0);
   const [carbGoal, setCarbGoal] = useState(0);
   const [fatGoal, setFatGoal] = useState(0);
+
+  const [proteinChoice, setProteinChoice] = useState(proteinOptions[0]);
+  const [carbChoice, setCarbChoice] = useState(carbOptions[0]);
+  const [fatChoice, setFatChoice] = useState(fatOptions[0]);
 
   return (
     <div>
@@ -24,19 +38,18 @@ export const Calculator = () => {
         </div>
       </div>
 
-      <div className={styles.grid}>
-
+      <div className={styles.selectorContainer}>
         <div className={styles.card}>
-          <h3>Protein 🍖</h3>
-          <p>CHOOSE YOUR MEAT.</p>
+          <h3 className={styles.selectorLabel}>Protein 🍖</h3>
+          <Dropdown options={proteinOptions} onChange={(e) => setProteinChoice(e.value)} value={proteinChoice} placeholder="Select an option" />
         </div>
         <div className={styles.card}>
-          <h3>Carbs 🍚</h3>
-          <p>CHOOSE YOUR CARBS.</p>
+          <h3 className={styles.selectorLabel}>Carbs 🍚</h3>
+          <Dropdown options={carbOptions} onChange={(e) => setCarbChoice(e.value)} value={carbChoice} placeholder="Select an option" />
         </div>
         <div className={styles.card}>
-          <h3>Fats 🥑</h3>
-          <p>CHOOSE YOUR FATS.</p>
+          <h3 className={styles.selectorLabel}>Fats 🥑</h3>
+          <Dropdown options={fatOptions} onChange={(e) => setFatChoice(e.value)} value={fatChoice} placeholder="Select an option" />
         </div>
 
       </div>
