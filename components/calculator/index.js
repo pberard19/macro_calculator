@@ -50,7 +50,7 @@ export const Calculator = () => {
       (fats[fatChoice]['pro'] * fatOz);
 
     const getDeltaFromGoal = (total, goal) => {
-      const delta = goal - total;
+      const delta = total - goal;
       let direction = '+';
       if(delta === 0) return 'Hit your goal!';
       if(delta > 0) return `+${Math.abs(delta)} grams above goal`;
