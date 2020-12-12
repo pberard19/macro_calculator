@@ -133,13 +133,13 @@ export const Calculator = () => {
       <div className={styles.selectorContainer}>
         <div className={styles.card}>
           <h3 className={styles.selectorLabel}>Carbs 🍚</h3>
-          {proteinOz} oz
+          {carbOz} oz
           <Dropdown options={carbOptions} onChange={(e) => setCarbChoice(e.value)} value={carbChoice} placeholder="Select an option" />
           {getFoodDescriptor(carbs[carbChoice], carbOz)}
         </div>
         <div className={styles.card}>
           <h3 className={styles.selectorLabel}>Protein 🍖</h3>
-          {carbOz} oz
+          {proteinOz} oz
           <Dropdown options={proteinOptions} onChange={(e) => setProteinChoice(e.value)} value={proteinChoice} placeholder="Select an option" />
           {getFoodDescriptor(proteins[proteinChoice], proteinOz)}
         </div>
