@@ -17,10 +17,6 @@ export default function Home() {
         <p className={styles.description}>
           Make your meals meet your macros
         </p>
-        <aside>
-          Don't know your macros? Try something like <a className={styles.link} target="_blank" rel="noopener" href="https://www.calculator.net/macro-calculator.html">this</a>
-        </aside>
-
         <Calculator />
       </main>
 
