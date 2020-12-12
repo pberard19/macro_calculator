@@ -36,16 +36,33 @@ export const Calculator = () => {
     setCarbOz,
     setFatOz,
   ) => {
-    let totalPro, totalCarb, totalFat = 0;
+    let totalCarb = 0;
+    let totalPro = 0;
+    let totalFat = 0;
 
-    let carbInfo = carbs[carbChoice]
-    let cOz = (carbGoal / carbInfo['carb']).toFixed(2);
+    // Maximize the carbs we get from our carb choice
+    let carbInfo = carbs[carbChoice];
+    let cOz = ((carbGoal - totalCarb) / carbInfo['carb']).toFixed(2);
+    // Total the other nutrients from this food
+    totalCarb = totalCarb + (cOz * carbInfo['carb'])
+    totalPro = totalPro + (cOz * carbInfo['pro'])
+    totalFat = totalFat + (cOz * carbInfo['fat'])
 
+    // Maximize the protein we get from our protein choice
     let proInfo = proteins[proteinChoice]
-    let pOz = (proteinGoal / proInfo['pro']).toFixed(2);
+    let pOz = ((proteinGoal - totalPro)/ proInfo['pro']).toFixed(2);
+    // Total the other nutrients from this food
+    totalCarb = totalCarb + (pOz * proInfo['carb'])
+    totalPro = totalPro + (pOz * proInfo['pro'])
+    totalFat = totalFat + (pOz * proInfo['fat'])
 
+    // Maximize the fat we get from our fat choice
     let fatInfo = fats[fatChoice]
-    let fOz = (fatGoal / fatInfo['fat']).toFixed(2);
+    let fOz = ((fatGoal - totalFat) / fatInfo['fat']).toFixed(2);
+    // Total the other nutrients from this food
+    totalCarb = totalCarb + (fOz * fatInfo['carb'])
+    totalPro = totalPro + (fOz * fatInfo['pro'])
+    totalFat = totalFat + (fOz * fatInfo['fat'])
 
     setProteinOz(pOz)
     setCarbOz(cOz)
@@ -66,7 +83,7 @@ export const Calculator = () => {
     );
   }, [proteinChoice, carbChoice, fatChoice, proteinGoal, carbGoal, fatGoal]);
 
-  const getFoodDescriptor = (choice, ounces) => {
+  const getFoodStats = (choice, ounces) => {
     return <div><br/>
     Stats (per oz):<br/>
       Calories: {choice['cal']}cal x {ounces}oz = {Math.round(choice['cal'] * ounces).toFixed(2)} cal<br/>
@@ -135,19 +152,19 @@ export const Calculator = () => {
           <h3 className={styles.selectorLabel}>Carbs 🍚</h3>
           {carbOz} oz
           <Dropdown options={carbOptions} onChange={(e) => setCarbChoice(e.value)} value={carbChoice} placeholder="Select an option" />
-          {getFoodDescriptor(carbs[carbChoice], carbOz)}
+          {getFoodStats(carbs[carbChoice], carbOz)}
         </div>
         <div className={styles.card}>
           <h3 className={styles.selectorLabel}>Protein 🍖</h3>
           {proteinOz} oz
           <Dropdown options={proteinOptions} onChange={(e) => setProteinChoice(e.value)} value={proteinChoice} placeholder="Select an option" />
-          {getFoodDescriptor(proteins[proteinChoice], proteinOz)}
+          {getFoodStats(proteins[proteinChoice], proteinOz)}
         </div>
         <div className={styles.card}>
           <h3 className={styles.selectorLabel}>Fats 🥑</h3>
           {fatOz} oz
           <Dropdown options={fatOptions} onChange={(e) => setFatChoice(e.value)} value={fatChoice} placeholder="Select an option" />
-          {getFoodDescriptor(fats[fatChoice], fatOz)}
+          {getFoodStats(fats[fatChoice], fatOz)}
         </div>
       </div>
     </div>
